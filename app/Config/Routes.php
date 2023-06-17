@@ -36,6 +36,8 @@ $routes->get('/language/setting', 'SettingController::index');
 $routes->get('/language/create', 'SettingController::create');
 $routes->post('/language/create', 'SettingController::create');
 
+//General Settings
+$routes->get('/general/create', 'GeneralController::index');
 // Auto Populate Route
 $routes->get('populate/code', 'SettingController::fetchData');
 /*

@@ -70,6 +70,7 @@
                             <th scope="col">Direction</th>
                             <th scope="col">Translate Status</th>
                             <th scope="col">Added Date</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +89,11 @@
                             <td><?= $language['direction'] ?></td>
                             <td>Missing</td>
                             <td><?= $formattedTime ?></td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="">View</a>
+                                <a class="btn btn-sm btn-success" href="">Edit</a>
+                                <a class="btn btn-sm btn-warning" href="">Delete</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
