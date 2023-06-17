@@ -32,7 +32,12 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 //Language Settings
-$routes->get('language/setting', 'SettingController::index');
+$routes->get('/language/setting', 'SettingController::index');
+$routes->get('/language/create', 'SettingController::create');
+$routes->post('/language/create', 'SettingController::create');
+
+// Auto Populate Route
+$routes->get('populate/code', 'SettingController::fetchData');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
