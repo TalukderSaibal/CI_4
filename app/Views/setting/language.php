@@ -98,6 +98,22 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="pagination">
+                    <div class="pagination_left">
+                        <a class="btn btn-sm btn-success" href="">Previous</a>
+                        <a class="btn btn-sm btn-primary" href="">1</a>
+                        <a class="btn btn-sm btn-success" href="">Next</a>
+                    </div>
+
+                    <div class="pagination_right">
+                        <p>Showing Page 1 of 1</p> / <span>Rows per page</span>
+                        <select name="" id="">
+                            <option value="">10</option>
+                            <option value="">20</option>
+                            <option value="">30</option>
+                        </select>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
