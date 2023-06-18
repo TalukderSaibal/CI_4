@@ -38,8 +38,15 @@ $routes->post('/language/create', 'SettingController::create');
 
 //General Settings
 $routes->get('/general/create', 'GeneralController::index');
+
+//Articles Settings
+$routes->get('/article/create', 'ArticleController::show');
+$routes->get('/article/save', 'ArticleController::create');
+$routes->post('/article/save', 'ArticleController::create');
+
 // Auto Populate Route
 $routes->get('populate/code', 'SettingController::fetchData');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

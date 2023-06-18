@@ -25,7 +25,7 @@
         <div class="row">
             <div class="language_header">
                 <div class="lan_head">
-                    <h1>Language</h1>
+                    <h1>English Blog Articles</h1>
                 </div>
 
                 <div class="icon_category">
@@ -35,67 +35,67 @@
                     <a href="">
                         Settings
                     </a>
-                    <a href="<?= base_url('language/create') ?>">
+                    <a href="<?= base_url('article/save') ?>">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </a>
                 </div>
 
             </div>
 
-            <?php
-
-                    use Faker\Core\DateTime;
-
-                    if (session()->getFlashdata('success')): ?>
-                        <div class="alert alert-success">
-                            <?= session()->getFlashdata('success') ?>
-                        </div>
-                    <?php endif; ?>
-
             <div class="language_div">
-                <div class="search_language">
-                    <form action="" method="post">
-                        <input type="search" name="search">
-                        <input type="submit" value="Search" name="submit">
-                    </form>
-                </div>
                 <div class="language_list">
+                    <?php
+                    
+                        if (session()->getFlashdata('success')): ?>
+                            <div class="alert alert-success">
+                                <?= session()->getFlashdata('success') ?>
+                            </div>
+                        <?php endif; 
+                    
+                    ?>
+
+
                 <table class="table">
                     <caption>List of language</caption>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Code</th>
-                            <th scope="col">Direction</th>
-                            <th scope="col">Translate Status</th>
-                            <th scope="col">Added Date</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Article</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Views</th>
+                            <th scope="col">Published Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $sl = 0; ?>
-                    <?php foreach ($languages as $language): $sl++; ?>
-                    <?php
-                    
-                        $dateTime = new \DateTime($language['added_time']);
-                        $formattedTime = $dateTime->format('M d, Y h:i A');
-                    
-                    ?>
+                        <?php
+                        
+                        foreach($articles as $value): ?>
+                        
+                        <?php ?>
                         <tr>
-                            <th scope="row"><?= $sl ?></th>
-                            <td><?= $language['language_name'] ?></td>
-                            <td><?= $language['code'] ?></td>
-                            <td><?= $language['direction'] ?></td>
-                            <td>Missing</td>
-                            <td><?= $formattedTime ?></td>
+                            <th scope="row">1</th>
+                            <td><?= strtoupper($value['article_language']) ?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="">View</a>
-                                <a class="btn btn-sm btn-success" href="">Edit</a>
-                                <a class="btn btn-sm btn-warning" href="">Delete</a>
+                                <div style="display: flex;">
+                                <a href="">
+                                <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
+                                </a>
+                                <div>
+                                <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
+                                <p><?= $value['article_description'] ?></p>
+                                </div>
+                                </div>
                             </td>
+                            <td>Admin Amdin</td>
+                            <td>Missing</td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>Oct 15, 2022 03:14 PM</td>
                         </tr>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
                 </div>

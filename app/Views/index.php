@@ -199,9 +199,9 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <a href="<?= base_url('article/create') ?>" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
+                <div data-i18n="Authentications">Article</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">

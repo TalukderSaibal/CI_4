@@ -70,3 +70,43 @@ body {
     width: 20%;
     padding: 12px 15px 12px;
 }
+
+.full_form{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.form_left {
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px 12px 10px;
+}
+
+.form_right {
+    width: 35%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 10px 12px 10px;
+}
+
+.image_block {
+    height: 200px;
+    border: 2px dashed #808080b0;
+    position: relative;
+}
+
+.image {
+    width: 50%;
+    margin: 0 auto;
+    top: 25%;
+    position: absolute;
+    left: 25%;
+}
+
+.error-message {
+    color: red; 
+  }
+  
+  .error {
+    border: 1px solid red;
+  }
