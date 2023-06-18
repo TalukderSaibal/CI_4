@@ -99,20 +99,31 @@
                     </tbody>
                 </table>
                 <div class="pagination">
-                    <div class="pagination_left">
+                    <!-- <div class="pagination_left">
                         <a class="btn btn-sm btn-success" href="">Previous</a>
                         <a class="btn btn-sm btn-primary" href="">1</a>
                         <a class="btn btn-sm btn-success" href="">Next</a>
+                    </div>-->
+
+                    <div class="d-flex justify-content-end">
+                        <?php if ($pager) :?>
+                        <?php $pagi_path='language/setting'; ?>
+                        <?php $pager->setPath($pagi_path); ?>
+                        <?= $pager->links() ?>
+                        <?php endif ?>
                     </div>
 
                     <div class="pagination_right">
-                        <p>Showing Page 1 of 1</p> / <span>Rows per page</span>
+                        <p>Showing Page 1 of 1</p> 
+                        <p>Rows per page</p>
+                        <p>
                         <select name="" id="">
                             <option value="">10</option>
                             <option value="">20</option>
                             <option value="">30</option>
                         </select>
-                    </div>
+                        </p>
+                    </div> 
                 </div>
                 </div>
             </div>

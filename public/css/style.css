@@ -116,3 +116,9 @@ border: 1px solid red;
     justify-content: space-between;
     align-items: center;
 }
+
+.pagination_right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

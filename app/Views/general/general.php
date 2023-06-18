@@ -35,8 +35,17 @@
                     <a href="">
                         Settings
                     </a>
+                    <a href="<?= base_url('language/create') ?>">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
                 </div>
 
+            </div>
+
+            <div class="language_div">
+                <form action="">
+                    
+                </form>
             </div>
         </div>
     </div>

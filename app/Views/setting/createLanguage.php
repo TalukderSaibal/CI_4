@@ -45,6 +45,18 @@
                         <label for="exampleFormControlSelect1">Code : *</label>
                         <select class="form-control" id="myDropdown" name="code">
                             <option value="">Select Code</option>
+                            <?php
+                                
+                                foreach($res as $val){ ?>
+                                    <?php
+                                    
+                                        $codeName = $val->country_name . '(' . $val->country_code . ')';
+                                    
+                                    ?>
+                                    <option value="<?= $val->id ?>"><?= $codeName ?></option>
+                                <?php }
+                                
+                                ?>
                         </select>
                     </div>
 
@@ -69,10 +81,6 @@
 
 
 
-
-
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
@@ -80,20 +88,20 @@
         var dropdown = $('#myDropdown');
         
         // Fetch data from the server
-            $.ajax({
-                url: '/populate/code', // URL matches the route defined in step 2
-                method: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    // Populate the dropdown with the data
-                    $.each(response, function(index, item) {
-                        dropdown.append($('<option></option>').attr('value', item.value).text(item.label));
-                    });
-                },
-                error: function() {
-                console.log('Failed to fetch data');
-                }
-            });
+            // $.ajax({
+            //     url: '/populate/code', // URL matches the route defined in step 2
+            //     method: 'GET',
+            //     dataType: 'json',
+            //     success: function(response) {
+            //         // Populate the dropdown with the data
+            //         $.each(response, function(index, item) {
+            //             dropdown.append($('<option></option>').attr('value', item.value).text(item.label));
+            //         });
+            //     },
+            //     error: function() {
+            //     console.log('Failed to fetch data');
+            //     }
+            // });
         });
 
         $('#myForm').submit(function(event) {

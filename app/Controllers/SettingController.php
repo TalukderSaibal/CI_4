@@ -6,11 +6,25 @@ use App\Models\LanguageModel;
 
 class SettingController extends BaseController
 {
+    protected $model,$db;
+
+    public function __construct(){
+        $this->db = \Config\Database::connect();
+        $this->model = new LanguageModel();
+    }
+
+
     public function index()
     {
-        $languageModel = new LanguageModel();
-        $languages = $languageModel->findAll();
-        return view('setting/language', ['languages' => $languages]);
+
+        // $languages = $languageModel->findAll();
+
+        $data = [
+            'languages' => $this->model->paginate(6),
+            'pager'     => $this->model->pager
+        ];
+
+        return view('setting/language', $data);
     }
 
     // Language Added Method
@@ -19,7 +33,10 @@ class SettingController extends BaseController
         $validation = \Config\Services::validation();
 
         if(!$this->request->is('post')){
-            return view('setting/createLanguage');
+            $query = $this->db->query('SELECT * FROM language_code');
+
+            $result = $query->getResult();
+            return view('setting/createLanguage', ['res' => $result]);
         }
 
         $languageModel = new LanguageModel();
@@ -66,12 +83,14 @@ class SettingController extends BaseController
 
     //Auto Populate language
     public function fetchData(){
-        $data = [
-            ['value' => 'aa', 'label'=> 'Afar(aa)'],
-            ['value' => 'avs', 'label'=> 'Avestan(avs)'],
-            ['value' => 'ak', 'label'=> 'Akan(ak)'],
-        ];
+       
 
-        return $this->response->setJSON($data);
+        // $data = [
+        //     ['value' => 'aa', 'label'=> $value->country_name],
+        //     ['value' => 'avs', 'label'=> 'Avestan(avs)'],
+        //     ['value' => 'ak', 'label'=> 'Akan(ak)'],
+        // ];
+
+        // return $this->response->setJSON($data);
     }
 }
