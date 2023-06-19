@@ -146,3 +146,11 @@ border: 1px solid red;
     width: 50%;
     margin: 10px 10px 10px;
 }
+
+.color_div{
+    display: flex;
+}
+
+.color_div input[type="color"]{
+    width: 50px;
+}

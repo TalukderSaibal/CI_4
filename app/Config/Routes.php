@@ -38,6 +38,7 @@ $routes->post('/language/create', 'SettingController::create');
 
 //General Settings
 $routes->get('/general/create', 'GeneralController::index');
+$routes->post('/general/save', 'GeneralController::create');
 
 //Articles Settings
 $routes->get('/article/create', 'ArticleController::show');

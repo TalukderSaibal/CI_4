@@ -36,6 +36,7 @@ class SettingController extends BaseController
             $query = $this->db->query('SELECT * FROM language_code');
 
             $result = $query->getResult();
+            
             return view('setting/createLanguage', ['res' => $result]);
         }
 
