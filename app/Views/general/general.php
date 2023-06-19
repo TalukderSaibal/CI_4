@@ -1,53 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="<?= base_url('icon/favicon.ico') ?>" />
-    <title>Document</title>
+<?= $this->extend('layout/base') ?>
 
-    <!-- Font Awesome CDN Link Here -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<?= $this->section('content') ?>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="language_header">
-                <div class="lan_head">
-                    <h1>General</h1>
+    <div class="form_flex11">
+        <h1>Add General</h1>
+        <form action="">
+            <div class="general">
+                <h4>General</h4>
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site Name: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site URL: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="icon_category">
-                    <a href="">
-                        Back
-                    </a>
-                    <a href="">
-                        Settings
-                    </a>
-                    <a href="<?= base_url('language/create') ?>">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </a>
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact Email: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Terms of Service: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date Format: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">TimeZone: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
                 </div>
 
             </div>
 
-            <div class="language_div">
-                <form action="">
-                    
-                </form>
+            <div class="general">
+                <h4>Colors</h4>
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site Name: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site URL: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact Email: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Terms of Service: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date Format: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">TimeZone: <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </form>
     </div>
-</body>
-</html>
+
+<?= $this->endSection('content') ?>
