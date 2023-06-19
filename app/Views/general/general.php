@@ -9,14 +9,17 @@
             <div class="alert alert-success"><?php echo session('success'); ?></div>
         <?php endif; ?>
 
-        <form action="<?= base_url('general/save') ?>" method="POST">
+        <?php
+        
+        if($data != null || $color != null){ ?>
+            <form action="<?= base_url('general/save') ?>" method="POST">
             <div class="general">
                 <h4>General</h4>
                 <div class="form_flex">
                     <div class="form_flex1">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Site Name: <span style="color:red;">*</span></label>
-                            <input type="text" value="<?= isset($data->name) ? $data->name : 0 ?>" name="general[site][name]" class="form-control">
+                            <input type="text" value="<?= $data->name ?>" name="general[site][name]" class="form-control">
                         </div>
                     </div>
                     <div class="form_flex1">
@@ -106,6 +109,108 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
+       <?php }else { ?>
+        <form action="<?= base_url('general/save') ?>" method="POST">
+            <div class="general">
+                <h4>General</h4>
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site Name: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][name]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site URL: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][url]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact Email: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][email]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Terms of Service: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][terms]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date Format: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][date]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">TimeZone: <span style="color:red;">*</span></label>
+                            <input type="text" value="" name="general[site][time]" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="general">
+                <h4>Colors</h4>
+                <div class="form_flex">
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Primary Color: <span style="color:red;">*</span></label>
+                            <div class="color_div">
+                                <input type="color" class="form-control colorInput" id="colorInput">
+                                <input type="text" value="" class="form-control hexInput" id="hexInput" name="color[site][primary]">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Secondary Color: <span style="color:red;">*</span></label>
+                            <div class="color_div">
+                                <input type="color" class="form-control colorInput" id="colorInput">
+                                <input type="text" value="" class="form-control hexInput" id="hexInput" name="color[site][secondary]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Thrid Color: <span style="color:red;">*</span></label>
+                            <div class="color_div">
+                                <input type="color" class="form-control colorInput" id="colorInput">
+                                <input type="text" value="" class="form-control hexInput" id="hexInput" name="color[site][third]">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_flex1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Background Color: <span style="color:red;">*</span></label>
+                            <div class="color_div">
+                                <input type="color" class="form-control colorInput" id="colorInput">
+                                <input type="text" value="" class="form-control hexInput" id="hexInput" name="color[site][background]">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+      <?php }
+        
+        
+        ?>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

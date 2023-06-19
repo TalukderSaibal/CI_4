@@ -17,17 +17,17 @@ class GeneralController extends BaseController
     {
         $data = $this->model->findAll();
         
-        // if(count($data) > 0){
-           
-        // } else {
-        //     return view('general/general', ['data' => null, 'color'=>null]);
-        // }
-
-        foreach($data as $row){
-            $jsonDecodeGeneral = json_decode($row['general']);
-            $jsonDecodeColor = json_decode($row['colors']);
-            return view('general/general', ['data'=>$jsonDecodeGeneral, 'color' => $jsonDecodeColor]);
+        if(count($data) > 0){
+            foreach($data as $row){
+                $jsonDecodeGeneral = json_decode($row['general']);
+                $jsonDecodeColor = json_decode($row['colors']);
+                return view('general/general', ['data'=>$jsonDecodeGeneral, 'color' => $jsonDecodeColor]);
+            }
+        } else {
+            return view('general/general', ['data' => null, 'color'=>null]);
         }
+
+        
     }
 
     public function create(){
