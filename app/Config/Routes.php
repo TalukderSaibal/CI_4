@@ -48,7 +48,9 @@ $routes->post('/article/save', 'ArticleController::create');
 //Category Settings
 $routes->get('/category/create','CategoryController::index');
 $routes->match(['get', 'post'],'category/save','CategoryController::create');
-$routes->put('article/edit/$id', 'ArticleController::update');
+$routes->get('article/edit/(:segment)', 'ArticleController::update/$1');
+$routes->post('article/update/(:any)', 'ArticleController::edit/$1');
+
 // For category search
 $routes->post('/category/search', 'CategoryController::search');
 

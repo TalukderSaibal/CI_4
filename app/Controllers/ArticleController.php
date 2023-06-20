@@ -18,8 +18,13 @@ class ArticleController extends BaseController
 
     public function show(){
         //Retrieve all data
-        $articles = $this->articleModel->findAll();
-        return view('article/article', ['articles'=>$articles]);
+        // $articles = $this->articleModel->findAll();
+        $data = [
+            'articles' => $this->articleModel->paginate(6),
+            'pager'     => $this->articleModel->pager
+        ];
+
+        return view('article/article', $data);
     }
 
 
@@ -47,7 +52,7 @@ class ArticleController extends BaseController
 
         if($data){
             // Set flash data for success message
-            $successMessage = 'Language added successfully.';
+            $successMessage = 'Article added successfully.';
             session()->setFlashdata('success', $successMessage);
 
             $articles = $this->articleModel->findAll();
@@ -57,6 +62,46 @@ class ArticleController extends BaseController
     }
 
     public function update($id){
-        return $id;
+        $data = $this->articleModel->where('id', $id)->find();
+        return view('article/articleEdit', ['data'=>$data]);
+    }
+
+    public function edit($id){
+        $title = $this->request->getPost('title');
+        $slug = $this->request->getPost('slug');
+        $summernote = $this->request->getPost('summernote');
+        $image = $this->request->getFile('image')->getName();
+        $languageSelect = $this->request->getPost('languageSelect');
+        $categorySelect = $this->request->getPost('categorySelect');
+        $description = $this->request->getPost('description');
+
+        $articleData = $this->articleModel->find($id);
+
+        $articleData = (object) $articleData;
+
+        if($articleData){
+            $articleData->article_title = $title;
+            $articleData->slug = $slug;
+            $articleData->article_content = $summernote;
+            $articleData->article_image = $image;
+            $articleData->article_language = $languageSelect;
+            $articleData->article_category = $categorySelect;
+            $articleData->article_description = $description;
+
+            $imageFile = $this->request->getFile('image');
+            $imageFile->move(ROOTPATH . 'public/articleImage');
+            $res = $this->articleModel->save($articleData);
+
+            $successMessage = 'Article update successfully.';
+            session()->setFlashdata('success', $successMessage);
+
+            $articles = $this->articleModel->findAll();
+
+            if($res){
+                return view('article/article',['successMessage'=>$successMessage, 'articles'=>$articles]);
+            }
+        }else{
+            return "Data not found";
+        }
     }
 }

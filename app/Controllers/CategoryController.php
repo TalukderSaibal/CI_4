@@ -18,7 +18,7 @@ class CategoryController extends BaseController
 
         $data = [
             'categories' => $this->model->paginate(6),
-            'pager'     => $this->model->pager
+            'pager'      => $this->model->pager
         ];
 
         return view('category/category', $data);

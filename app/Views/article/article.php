@@ -51,6 +51,8 @@
                     </thead>
                     <tbody>
                         <?php
+
+
                         
                         foreach($articles as $value): ?>
                         
@@ -78,6 +80,27 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="pagination">
+                    <div class="d-flex justify-content-end">
+                        <?php if ($pager) :?>
+                        <?php $pagi_path='article/create'; ?>
+                        <?php $pager->setPath($pagi_path); ?>
+                        <?= $pager->links() ?>
+                        <?php endif ?>
+                    </div>
+
+                    <div class="pagination_right">
+                        <p>Showing Page 1 of 1</p> 
+                        <p>Rows per page</p>
+                        <p>
+                        <select name="" id="">
+                            <option value="">10</option>
+                            <option value="">20</option>
+                            <option value="">30</option>
+                        </select>
+                        </p>
+                    </div> 
+            </div>
                 </div>
             </div>
 </div>
