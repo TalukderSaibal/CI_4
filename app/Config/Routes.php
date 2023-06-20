@@ -45,6 +45,13 @@ $routes->get('/article/create', 'ArticleController::show');
 $routes->get('/article/save', 'ArticleController::create');
 $routes->post('/article/save', 'ArticleController::create');
 
+//Category Settings
+$routes->get('/category/create','CategoryController::index');
+$routes->match(['get', 'post'],'category/save','CategoryController::create');
+$routes->put('article/edit/$id', 'ArticleController::update');
+// For category search
+$routes->post('/category/search', 'CategoryController::search');
+
 // Auto Populate Route
 $routes->get('populate/code', 'SettingController::fetchData');
 

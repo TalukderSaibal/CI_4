@@ -19,9 +19,6 @@ class ArticleController extends BaseController
     public function show(){
         //Retrieve all data
         $articles = $this->articleModel->findAll();
-        // foreach($articles as $article){
-        //     return $article['article_image'];
-        // }
         return view('article/article', ['articles'=>$articles]);
     }
 
@@ -57,5 +54,9 @@ class ArticleController extends BaseController
 
             return view('article/article', ['successMessage'=>$successMessage, 'articles'=>$articles]);
         }
+    }
+
+    public function update($id){
+        return $id;
     }
 }

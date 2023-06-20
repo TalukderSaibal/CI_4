@@ -154,3 +154,15 @@ border: 1px solid red;
 .color_div input[type="color"]{
     width: 50px;
 }
+
+.form_display {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category_select{
+    width: 50%;
+    margin: 8px 8px 8px;
+}

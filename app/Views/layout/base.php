@@ -235,9 +235,9 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <a href="<?= base_url('category/create') ?>" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Misc</div>
+                <div data-i18n="Misc">Category</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">

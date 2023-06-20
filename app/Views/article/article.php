@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="<?= base_url('icon/favicon.ico') ?>" />
-    <title>Document</title>
+<?= $this->extend('layout/base') ?>
 
-    <!-- Font Awesome CDN Link Here -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<?= $this->section('content') ?>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="language_header">
+<div class="form_flex11">
+<div class="language_header">
                 <div class="lan_head">
                     <h1>English Blog Articles</h1>
                 </div>
@@ -56,7 +36,7 @@
 
 
                 <table class="table">
-                    <caption>List of language</caption>
+                    <caption>List of Article</caption>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -80,7 +60,7 @@
                             <td><?= strtoupper($value['article_language']) ?></td>
                             <td>
                                 <div style="display: flex;">
-                                <a href="">
+                                <a href="<?= base_url('article/edit/' . $value['id']) ?>">
                                 <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
                                 </a>
                                 <div>
@@ -100,7 +80,7 @@
                 </table>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
-</html>
+</div>
+
+<?= $this->endSection('content') ?>
+
