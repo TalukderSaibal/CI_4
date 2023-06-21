@@ -69,7 +69,7 @@
                             <td><?= $formattedTime ?></td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="">View</a>
-                                <a class="btn btn-sm btn-success" href="">Edit</a>
+                                <a class="btn btn-sm btn-success" href="<?= base_url('edit/'. $language['id']) ?>">Edit</a>
                                 <a class="btn btn-sm btn-warning" href="">Delete</a>
                             </td>
                         </tr>

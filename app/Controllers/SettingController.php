@@ -85,6 +85,64 @@ class SettingController extends BaseController
         }
     }
 
+    //Edit form for language
+    public function edit($id){
+        if($id != null){
+            $result = $this->model->find($id);
+
+            $id              = $result['id'];
+            $image           = $result['language_image'];
+            $name            = $result['language_name'];
+            $code            = $result['code'];
+            $direction       = $result['direction'];
+            $language_status = $result['language_status'];
+
+            // $query = $this->db->query('SELECT * FROM language_code');
+            // $languageResult = $query->getResult();
+            // 'languageRes'=>$languageResult,
+            
+
+            if(!empty($result)){
+                return view('setting/editLanguage', ['id'=>$id,'image'=> $image,'name' => $name, 'code'=> $code, 'direction'=> $direction, 'language_status'=> $language_status]);
+            }
+        }
+    }
+
+    public function update(){
+
+        $validationRules = [
+            'name' => 'required',
+            'direction' => 'required',
+            'flag' => 'uploaded[flag]|max_size[flag,1024]|ext_in[flag,png,jpg,jpeg]'
+        ];
+    
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+
+        $id = $this->request->getPost('lang_id');
+        $flagFile      = $this->request->getFile('flag')->getName();
+        $name          = $this->request->getPost('name');
+        $direction     = $this->request->getPost('direction');
+        $languageCheck = $this->request->getPost('languageCheck') ? 1:0;
+
+        $data = [
+            'language_image'  => $flagFile,
+            'language_name'   => $name,
+            'direction'       => $direction,
+            'language_status' => $languageCheck
+        ];
+
+        $flagFile = $this->request->getFile('flag');
+        $flagFile->move(ROOTPATH . 'public/uploads');
+
+        $success = $this->model->update($id, $data);
+        if($success){
+            return redirect()->to('language/setting');
+        } 
+    }
+
     //Language Search Method
     public function languageSearch(){
         $searchData = $this->request->getPost('search');

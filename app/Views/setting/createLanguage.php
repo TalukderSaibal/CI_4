@@ -22,7 +22,7 @@
                     <label for="exampleFormControlFile1">Choose Flag</label>
                     <input type="file" name="flag" class="form-control-file">
                     <span>Allowed Type : (png.jpg,jpeg)</span>
-                    <span style="color:red !important;"><?= validation_show_error('languageCheck') ?></span>
+                    <span style="color:red !important;"><?= validation_show_error('flag') ?></span>
                 </div>
             </div>
 
