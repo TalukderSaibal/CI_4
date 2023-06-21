@@ -2,14 +2,16 @@
 
 namespace App\Controllers;
 use App\Models\CategoryModel;
+use App\Models\LanguageModel;
 
 class CategoryController extends BaseController
 {
-    public $model;
+    public $model,$languageModel;
 
     public function __construct()
     {
         $this->model = new CategoryModel();
+        $this->languageModel = new LanguageModel();
     }
 
 
@@ -25,11 +27,13 @@ class CategoryController extends BaseController
     }
 
     public function create(){
+        $languageData = $this->languageModel->findAll();
+        $msg = "";
+        
         if(!$this->request->is('post')){
-            return view('category/createcategory');
+            return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
         }else{
             $validation = \Config\Services::validation();
-
                 $rules = [
                     'language' => 'required',
                     'name' => 'required',
@@ -37,9 +41,15 @@ class CategoryController extends BaseController
                 ];
 
                 if (!$this->validate($rules)) {
-                    return view('category/createcategory');
+                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
                 }
-                
+
+                $languagevalue = $this->request->getPost('language');
+                if($languagevalue == 0){
+                    $msg = "You must select a language";
+                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
+                }
+
                 $data = [
                     'language_name' => $this->request->getPost('language'),
                     'category_name' => $this->request->getPost('name'),
@@ -55,7 +65,8 @@ class CategoryController extends BaseController
                 $categories = $this->model->findAll();
 
                 if($res){
-                    return view('category/category', ['categories' => $categories,'successMsg' => $successMessage]);
+                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg, 'successMsg' => $successMessage]);
+                    // return view('category/category', ['categories' => $categories,'successMsg' => $successMessage]);
                 } 
         }
         

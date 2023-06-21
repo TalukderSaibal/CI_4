@@ -4,19 +4,29 @@
 
     <div class="form_flex11">
         <h2>Category Create</h2>
+        <h4 style="color: red;"><?= $msg ?></h4>
         <div class="language_div">
             <div class="language_list">
+
+            <?php if (session('success')) : ?>
+                <div class="alert alert-success"><?php echo session('success'); ?></div>
+            <?php endif; ?>
+
                 <form action="<?php base_url('category/save') ?>" method="POST" enctype="multipart/form-data" id="myForm">
                     <div class="form_display">
                         <div class="category_select">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Language <span style="color:red;">*</span></label>
                                 <select class="form-control" name="language">
-                                    <option>Choose</option>
-                                    <option>English</option>
-                                    <option>Bangla</option>
-                                    <option>Hindi</option>
-                                    <option>Arabic</option>
+                                    <option value="0">Choose</option>
+                                    <?php
+                                    
+                                    foreach($languages as $key => $language){ ?>
+                                        <option value="<?= $language['id'] ?>"><?= $language['language_name'] ?></option>
+                                    <?php }
+                                    
+                                    ?>
+                                    <span><?= validation_show_error('language') ?></span>
                                 </select>
                             </div>
                         </div>

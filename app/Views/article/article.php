@@ -62,13 +62,13 @@
                             <td><?= strtoupper($value['article_language']) ?></td>
                             <td>
                                 <div style="display: flex;">
-                                <a href="<?= base_url('article/edit/' . $value['id']) ?>">
-                                <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
-                                </a>
-                                <div>
-                                <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
-                                <p><?= $value['article_description'] ?></p>
-                                </div>
+                                    <a href="<?= base_url('article/edit/' . $value['id']) ?>">
+                                    <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
+                                    </a>
+                                    <div>
+                                        <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
+                                        <p><?= $value['article_description'] ?></p>
+                                    </div>
                                 </div>
                             </td>
                             <td>Admin Amdin</td>

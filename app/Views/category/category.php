@@ -21,9 +21,7 @@
             </div>
         </div>
 
-        <?php if (session('success')) : ?>
-            <div class="alert alert-success"><?php echo session('success'); ?></div>
-        <?php endif; ?>
+       
 
         <div>
             
