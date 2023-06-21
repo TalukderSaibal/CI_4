@@ -8,7 +8,7 @@ class CategoryModel extends Model
 {
     protected $table = 'categories';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['language_name', 'category_name', 'category_slug'];
+    protected $allowedFields = ['language_id', 'category_name', 'category_slug'];
 
     public function search($searchTerm)
     {

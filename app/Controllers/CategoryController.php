@@ -6,10 +6,11 @@ use App\Models\LanguageModel;
 
 class CategoryController extends BaseController
 {
-    public $model,$languageModel;
+    public object $model,$languageModel,$db;
 
     public function __construct()
     {
+        $this->db = \Config\Database::connect();
         $this->model = new CategoryModel();
         $this->languageModel = new LanguageModel();
     }
@@ -17,8 +18,13 @@ class CategoryController extends BaseController
 
     public function index(){
         // Retrieve Data from database
+        $query = $this->db->query("SELECT * FROM categories 
+        LEFT JOIN languages ON categories.language_id = languages.id");
+        $results = $query->getResult();
+
 
         $data = [
+            'res'        => $results,
             'categories' => $this->model->paginate(6),
             'pager'      => $this->model->pager
         ];
@@ -36,8 +42,8 @@ class CategoryController extends BaseController
             $validation = \Config\Services::validation();
                 $rules = [
                     'language' => 'required',
-                    'name' => 'required',
-                    'slug' => 'required',
+                    'name'     => 'required',
+                    'slug'     => 'required',
                 ];
 
                 if (!$this->validate($rules)) {
@@ -51,7 +57,7 @@ class CategoryController extends BaseController
                 }
 
                 $data = [
-                    'language_name' => $this->request->getPost('language'),
+                    'language_id' => $this->request->getPost('language'),
                     'category_name' => $this->request->getPost('name'),
                     'category_slug' => $this->request->getPost('slug'),
                 ];

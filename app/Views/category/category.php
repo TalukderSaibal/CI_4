@@ -51,15 +51,20 @@
                     
                     if(count($categories) > 0){
                     
-                    foreach($categories as $category){ ?>
-                        <tr>
-                            <th scope="row"><?= $category['id'] ?></th>
-                            <td><?= $category['language_name'] ?></td>
-                            <td><?= $category['category_name'] ?></td>
-                            <td><?= $category['category_slug'] ?></td>
-                            <td>@mdo</td>
-                        </tr>
-                <?php }
+                    foreach($categories as $category){ 
+                        foreach($res as $val){ 
+                            if($val->id == $category['language_id']){?>
+                            <tr>
+                                <th scope="row"><?= $category['id'] ?></th>
+                                <td><?= $val->language_name ?></td>
+                                <td><?= $category['category_name'] ?></td>
+                                <td><?= $category['category_slug'] ?></td>
+                                <td>@mdo</td>
+                            </tr>
+                            <?php break; ?>
+                            <?php }
+                        }
+                    }
                     
                     ?>
                     <?php }else {
