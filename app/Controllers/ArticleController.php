@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ArticleModel;
+use App\Models\LanguageModel;
 
 class ArticleController extends BaseController
 {
@@ -32,7 +33,9 @@ class ArticleController extends BaseController
         $validation = \Config\Services::validation();
 
         if(!$this->request->is('post')){
-            return view('article/articleCreate');
+            $languageModel = new LanguageModel();
+            $languageData = $languageModel->findAll();
+            return view('article/articleCreate', ['language'=>$languageData]);
         }
 
         $data = [
@@ -49,6 +52,8 @@ class ArticleController extends BaseController
 
         $imageFile = $this->request->getFile('image');
         $imageFile->move(ROOTPATH . 'public/articleImage');
+
+       
 
         if($data){
             // Set flash data for success message

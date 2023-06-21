@@ -84,10 +84,13 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Language <span style="color:red;">*</span></label>
                                     <select class="form-control" id="languageSelect" name="languageSelect">
-                                        <option>Choose</option>
-                                        <option value="english">English</option>
-                                        <option value="bangla">Bangla</option>
-                                        <option value="french">French</option>
+                                        <?php
+                                        
+                                        foreach($language as $key=> $lang){ ?>
+                                            <option value="<?= $lang['id'] ?>"><?= $lang['language_name'] ?></option>
+                                        <?php }
+                                        
+                                        ?>
                                     </select>
                                 </div>
 

@@ -82,6 +82,13 @@ class SettingController extends BaseController
         return view('setting/language', ['languages' => $languages, 'successMessage' => $successMessage]);        
     }
 
+    //Language Search Method
+    public function languageSearch(){
+        $searchData = $this->request->getPost('search');
+        $result = $this->model->search($searchData);
+        return view('setting/languageView', ['results' => $result]);
+    }
+
     //Auto Populate language
     public function fetchData(){
        

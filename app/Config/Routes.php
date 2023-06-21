@@ -33,8 +33,13 @@ $routes->get('/', 'Home::index');
 
 //Language Settings
 $routes->get('/language/setting', 'SettingController::index');
-$routes->get('/language/create', 'SettingController::create');
-$routes->post('/language/create', 'SettingController::create');
+// $routes->get('/language/create', 'SettingController::create');
+// $routes->post('/language/create', 'SettingController::create');
+
+$routes->match(['get', 'post'], 'language/create', 'SettingController::create');
+
+//For language search
+$routes->post('/language/search', 'SettingController::languageSearch');
 
 //General Settings
 $routes->get('/general/create', 'GeneralController::index');

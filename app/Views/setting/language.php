@@ -34,7 +34,7 @@
 
             <div class="language_div">
                 <div class="search_language">
-                    <form action="" method="post">
+                    <form action="<?= base_url('language/search') ?>" method="post">
                         <input type="search" name="search">
                         <input type="submit" value="Search" name="submit">
                     </form>
