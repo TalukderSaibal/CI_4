@@ -22,16 +22,6 @@
 
     </div>
 
-            <?php
-
-                    use Faker\Core\DateTime;
-
-                    if (session()->getFlashdata('success')): ?>
-                        <div class="alert alert-success">
-                            <?= session()->getFlashdata('success') ?>
-                        </div>
-                    <?php endif; ?>
-
             <div class="language_div">
                 <div class="search_language">
                     <form action="<?= base_url('language/search') ?>" method="post">
@@ -40,7 +30,10 @@
                     </form>
                 </div>
                 <div class="language_list">
-                <table class="table">
+                <?php
+                
+                if(count($languages) > 0){ ?>
+                    <table class="table">
                     <caption>List of language</caption>
                     <thead>
                         <tr>
@@ -64,8 +57,13 @@
                     ?>
                         <tr>
                             <th scope="row"><?= $sl ?></th>
-                            <td><?= $language['language_name'] ?></td>
-                            <td><?= $language['code'] ?></td>
+                            <td>
+                                <div style="display:flex; align-items:center">
+                                    <img style="width:40px; height:35px; margin:5px;" src="<?= base_url('uploads/' . $language['language_image']) ?>" alt="no images">
+                                    <?= $language['language_name'] ?>
+                                </div>
+                            </td>
+                            <td><?= strtolower($language['code']) ?></td>
                             <td><?= $language['direction'] ?></td>
                             <td>Missing</td>
                             <td><?= $formattedTime ?></td>
@@ -78,6 +76,14 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+               <?php }else{ ?>
+                    <div>
+                        <h2>No Language added recently</h2>
+                        <a class="btn btn-sm btn-primary" href="<?= base_url('language/create') ?>">Add language</a>
+                    </div>
+              <?php }
+                
+                ?>
                 <div class="pagination">
                     <!-- <div class="pagination_left">
                         <a class="btn btn-sm btn-success" href="">Previous</a>
