@@ -68,47 +68,63 @@ class ArticleController extends BaseController
     }
 
     public function update($id){
-        $data = $this->articleModel->where('id', $id)->find();
-        return view('article/articleEdit', ['data'=>$data]);
+        // $data = $this->articleModel->where('id', $id)->find();
+
+        $query = 'SELECT * FROM  languages
+        LEFT JOIN articletbl ON languages.id = articletbl.article_language
+        LEFT JOIN categories ON languages.id = categories.language_id
+        WHERE articletbl.id= ' . $id;
+
+        $result = $this->db->query($query);
+        $res = $result->getResult();
+
+        // $languageId = $res->article_language;
+
+        foreach($res as $row){
+            $languageId = $row->article_language;
+            $query1 = 'SELECT * FROM categories WHERE language_id='. $languageId;
+            $result1 = $this->db->query($query1);
+            $res1 = $result1->getResult();
+        }
+        return view('article/articleEdit', ['data'=>$res, 'data2' => $res1]);
     }
 
     // Article data form
-    public function edit($id){
+    public function edit(){
 
-        $title          = $this->request->getPost('title');
-        $slug           = $this->request->getPost('slug');
-        $summernote     = $this->request->getPost('summernote');
-        $image          = $this->request->getFile('image')->getName();
-        $languageSelect = $this->request->getPost('languageSelect');
-        $categorySelect = $this->request->getPost('categorySelect');
-        $description    = $this->request->getPost('description');
+        // For validation
+        $validationRules = [
+            'name' => 'required',
+            'direction' => 'required',
+            'flag' => 'uploaded[flag]|max_size[flag,1024]|ext_in[flag,png,jpg,jpeg]'
+        ];
+    
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+        
+        
 
-        $articleData = $this->articleModel->find($id);
+        $data = [
+            'id'                  => $this->request->getPost('articleId'),
+            'article_title'       => $this->request->getPost('title'),
+            'slug'                => $this->request->getPost('slug'),
+            'article_content'     => $this->request->getPost('summernote'),
+            'article_image'       => $this->request->getFile('image')->getName(),
+            'article_language'    => $this->request->getPost('languageSelect'),
+            'article_category'    => $this->request->getPost('categorySelect'),
+            'article_description' => $this->request->getPost('description'),
+        ];
 
-        $articleData = (object) $articleData;
+        $imageFile = $this->request->getFile('image');
+        $imageFile->move(ROOTPATH . 'public/articleImage');
 
-        if($articleData){
-            $articleData->article_title       = $title;
-            $articleData->slug                = $slug;
-            $articleData->article_content     = $summernote;
-            $articleData->article_image       = $image;
-            $articleData->article_language    = $languageSelect;
-            $articleData->article_category    = $categorySelect;
-            $articleData->article_description = $description;
-
-            $imageFile = $this->request->getFile('image');
-            $imageFile->move(ROOTPATH . 'public/articleImage');
-            $res = $this->articleModel->save($articleData);
-
+        $res = $this->articleModel->update($this->request->getPost('articleId'), $data);
+        
+        if($res){
             $successMessage = 'Article update successfully.';
-            session()->setFlashdata('success', $successMessage);
-
-            $articles = $this->articleModel->findAll();
-            if($res){
-                return view('article/article',['successMessage'=>$successMessage, 'articles'=>$articles]);
-            }
-        }else{
-            return "Data not found";
+            session()->setFlashdata('update', $successMessage);
+            return redirect()->to('/article/create');
         }
     }
 

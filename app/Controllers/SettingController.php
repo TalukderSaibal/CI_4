@@ -121,7 +121,7 @@ class SettingController extends BaseController
         }
 
 
-        $id = $this->request->getPost('lang_id');
+        $id            = $this->request->getPost('lang_id');
         $flagFile      = $this->request->getFile('flag')->getName();
         $name          = $this->request->getPost('name');
         $direction     = $this->request->getPost('direction');

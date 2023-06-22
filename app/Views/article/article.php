@@ -46,6 +46,12 @@
                     </div>
                 <?php endif; ?>
 
+                <?php if (session()->getFlashdata('update')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('update'); ?>
+                    </div>
+                <?php endif; ?>
+
 
                 <table class="table">
                     <caption>List of Article</caption>

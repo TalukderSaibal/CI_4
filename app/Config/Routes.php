@@ -51,7 +51,7 @@ $routes->post('/general/save', 'GeneralController::create');
 //Articles Settings
 $routes->get('/article/create', 'ArticleController::show');
 $routes->get('/article/save', 'ArticleController::create');
-$routes->post('/article/save', 'ArticleController::create');
+$routes->post('/article/update', 'ArticleController::edit');
 $routes->post('/getCategories', 'ArticleController::getCategories');
 $routes->get('/article/delete/(:any)', 'ArticleController::delete/$1');
 

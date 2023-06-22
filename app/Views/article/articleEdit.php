@@ -58,27 +58,31 @@
                     }
                     
                     ?>
-                    <form action="<?= base_url('article/update/'. $value['id']) ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                    <form action="<?= base_url('article/update') ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Article Id <span style="color:red;">*</span></label>
+                            <input type="hidden" value="<?= $value->id ?>" name="articleId">
+                        </div>
                         <div class="full_form">
                             <div class="form_left">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Article Title <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" value="<?=  $value['article_title'] ?>" name="title" id="title">
+                                    <input type="text" class="form-control" value="<?=  $value->article_title ?>" name="title" id="title">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="slug" name="slug" value="<?= $value['slug'] ?>">
+                                    <input type="text" class="form-control" id="slug" name="slug" value="<?= $value->slug ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Article Content <span style="color:red;">*</span></label>
-                                    <textarea class="form-control" id="summernote" name="summernote"><?= $value['article_content'] ?></textarea>
+                                    <textarea class="form-control" id="summernote" name="summernote"><?= $value->article_content ?></textarea>
                                 </div>
                             </div>
                             <div class="form_right">
                                 <div class="image_block">
                                     <div class="image">
                                         <div class="form-group">
-                                            <img src="<?= base_url('articleImage/' . $value['article_image']) ?>" width="100px" alt="article Image">
+                                            <img src="<?= base_url('articleImage/' . $value->article_image) ?>" width="100px" alt="article Image">
                                             <label for="exampleFormControlFile1">Choose Image</label>
                                             <input type="file" class="form-control-file" name="image" id="image">
                                         </div>
@@ -92,22 +96,26 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Language <span style="color:red;">*</span></label>
                                     <select class="form-control" id="languageSelect" name="languageSelect">
-                                        <option value="english"><?= strtoupper($value['article_language']) ?></option>
-                                        <option value="bangla">Bangla</option>
-                                        <option value="french">French</option>
+                                        <option value="<?= $value->id ?>"><?= strtoupper($value->language_name) ?></option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Article Category <span style="color:red;">*</span></label>
                                     <select class="form-control" id="categorySelect" name="categorySelect">
-                                    <option value="<?php  echo $value['article_category'];?>"><?php  echo $value['article_category'];?></option>
+                                        <?php
+                                        
+                                        foreach($data2 as $val1){ ?>
+                                            <option selected value="<?= $val1->id ?>"><?= $val1->category_name  ?></option>
+                                        <?php }
+                                        
+                                        ?>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Short Description <span style="color:red;">*</span></label>
-                                    <textarea class="form-control" id="description" name="description" rows="3"><?= $value['article_description'] ?></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="3"><?= $value->article_description ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -146,12 +154,6 @@
 
     <script>
         $(document).ready(function() {
-            // Define the language to category mapping
-            const languageCategories = {
-                english: ["File Upload", "Video Sharing", "Storage"],
-                bangla : ["File Upload", "Video Sharing", "Storage"],
-                french : ["File Upload", "Video Sharing", "Storage"],
-            };
             console.log(languageCategories);
             $('#languageSelect').on('change',function() {
                 var languageSelect = $(this).val();

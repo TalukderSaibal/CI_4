@@ -148,12 +148,6 @@
 
     <script>
         $(document).ready(function() {
-            // Define the language to category mapping
-            // const languageCategories = {
-            //     english: ["File Upload", "Video Sharing", "Storage"],
-            //     bangla : ["File Upload", "Video Sharing", "Storage"],
-            //     french : ["File Upload", "Video Sharing", "Storage"],
-            // };
             $('#languageSelect').on('change',function() {
                 var languageId = $(this).val();
                 $.ajax({
