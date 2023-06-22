@@ -152,8 +152,6 @@ class SettingController extends BaseController
 
     //Auto Populate language
     public function fetchData(){
-       
-
         // $data = [
         //     ['value' => 'aa', 'label'=> $value->country_name],
         //     ['value' => 'avs', 'label'=> 'Avestan(avs)'],

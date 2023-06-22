@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\ArticleModel;
 use App\Models\LanguageModel;
-use App\Models\CategoryModel;
 
 class ArticleController extends BaseController
 {
@@ -72,26 +71,28 @@ class ArticleController extends BaseController
         return view('article/articleEdit', ['data'=>$data]);
     }
 
+    // Article data form
     public function edit($id){
-        $title = $this->request->getPost('title');
-        $slug = $this->request->getPost('slug');
-        $summernote = $this->request->getPost('summernote');
-        $image = $this->request->getFile('image')->getName();
+
+        $title          = $this->request->getPost('title');
+        $slug           = $this->request->getPost('slug');
+        $summernote     = $this->request->getPost('summernote');
+        $image          = $this->request->getFile('image')->getName();
         $languageSelect = $this->request->getPost('languageSelect');
         $categorySelect = $this->request->getPost('categorySelect');
-        $description = $this->request->getPost('description');
+        $description    = $this->request->getPost('description');
 
         $articleData = $this->articleModel->find($id);
 
         $articleData = (object) $articleData;
 
         if($articleData){
-            $articleData->article_title = $title;
-            $articleData->slug = $slug;
-            $articleData->article_content = $summernote;
-            $articleData->article_image = $image;
-            $articleData->article_language = $languageSelect;
-            $articleData->article_category = $categorySelect;
+            $articleData->article_title       = $title;
+            $articleData->slug                = $slug;
+            $articleData->article_content     = $summernote;
+            $articleData->article_image       = $image;
+            $articleData->article_language    = $languageSelect;
+            $articleData->article_category    = $categorySelect;
             $articleData->article_description = $description;
 
             $imageFile = $this->request->getFile('image');
@@ -102,7 +103,6 @@ class ArticleController extends BaseController
             session()->setFlashdata('success', $successMessage);
 
             $articles = $this->articleModel->findAll();
-
             if($res){
                 return view('article/article',['successMessage'=>$successMessage, 'articles'=>$articles]);
             }
@@ -123,5 +123,14 @@ class ArticleController extends BaseController
         // $response['categories'] = $categories;
 
         return $this->response->setJSON(['categories' => $response]);
+    }
+
+    //For Delete action
+    public function delete($id){
+        if($id != null){
+            $this->articleModel->delete($id);
+            session()->setFlashdata('delete_success', 'Article deleted successfully.');
+            return redirect()->to('/article/create');
+        }
     }
 }

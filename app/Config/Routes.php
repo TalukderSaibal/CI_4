@@ -53,6 +53,7 @@ $routes->get('/article/create', 'ArticleController::show');
 $routes->get('/article/save', 'ArticleController::create');
 $routes->post('/article/save', 'ArticleController::create');
 $routes->post('/getCategories', 'ArticleController::getCategories');
+$routes->get('/article/delete/(:any)', 'ArticleController::delete/$1');
 
 //Category Settings
 $routes->get('/category/create','CategoryController::index');

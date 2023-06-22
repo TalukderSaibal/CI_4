@@ -25,9 +25,24 @@
             <div class="language_div">
                 <div class="language_list">
 
+                <!-- For insert data message -->
                 <?php if (session()->getFlashdata('success')) : ?>
                     <div class="alert alert-success">
                         <?php echo session()->getFlashdata('success'); ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- For delete data msg -->
+                <?php if (session()->getFlashdata('delete_success')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('delete_success'); ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- For update data msg -->
+                <?php if (session()->getFlashdata('update')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('update'); ?>
                     </div>
                 <?php endif; ?>
 
@@ -44,6 +59,7 @@
                             <th scope="col">Comments</th>
                             <th scope="col">Views</th>
                             <th scope="col">Published Date</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +71,7 @@
                             foreach($res as $val){
                                 if($val->id == $value['article_language']){ ?>
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row"><?= $value['id'] ?></th>
                                         <td><?= strtoupper($val->language_name) ?></td>
                                         <td>
                                             <div style="display: flex;">
@@ -73,6 +89,10 @@
                                         <td>20</td>
                                         <td>0</td>
                                         <td>Oct 15, 2022 03:14 PM</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="">View</a>
+                                            <a class="btn btn-sm btn-warning" href="<?= base_url('article/delete/'. $value['id']) ?>">Delete</a>
+                                        </td>
                                     </tr>
                                <?php break; }
                             }

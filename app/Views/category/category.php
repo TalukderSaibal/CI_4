@@ -43,6 +43,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Views</th>
                             <th scope="col">Published Date</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,11 @@
                                 <td><?= $category['category_name'] ?></td>
                                 <td><?= $category['category_slug'] ?></td>
                                 <td>@mdo</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="">View</a>
+                                    <a class="btn btn-sm btn-success" href="">Edit</a>
+                                    <a class="btn btn-sm btn-warning" href="">Delete</a>
+                                </td>
                             </tr>
                             <?php break; ?>
                             <?php }
