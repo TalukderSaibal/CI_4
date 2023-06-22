@@ -52,6 +52,7 @@ $routes->post('/general/save', 'GeneralController::create');
 $routes->get('/article/create', 'ArticleController::show');
 $routes->get('/article/save', 'ArticleController::create');
 $routes->post('/article/save', 'ArticleController::create');
+$routes->post('/getCategories', 'ArticleController::getCategories');
 
 //Category Settings
 $routes->get('/category/create','CategoryController::index');

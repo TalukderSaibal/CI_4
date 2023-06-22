@@ -4,13 +4,15 @@ namespace App\Controllers;
 
 use App\Models\ArticleModel;
 use App\Models\LanguageModel;
+use App\Models\CategoryModel;
 
 class ArticleController extends BaseController
 {
-    protected $articleModel;
+    protected $articleModel,$db;
 
     public function __construct()
     {
+        $this->db = \Config\Database::connect();
         $this->articleModel = new ArticleModel();
     }
     public function index(){
@@ -18,11 +20,14 @@ class ArticleController extends BaseController
     }
 
     public function show(){
-        //Retrieve all data
-        // $articles = $this->articleModel->findAll();
+        $query = $this->db->query('SELECT * FROM languages
+        LEFT JOIN articletbl ON languages.id = articletbl.article_language');
+        $res  = $query->getResult();
+
         $data = [
+            'res'      => $res,
             'articles' => $this->articleModel->paginate(6),
-            'pager'     => $this->articleModel->pager
+            'pager'    => $this->articleModel->pager
         ];
 
         return view('article/article', $data);
@@ -53,16 +58,12 @@ class ArticleController extends BaseController
         $imageFile = $this->request->getFile('image');
         $imageFile->move(ROOTPATH . 'public/articleImage');
 
-       
 
         if($data){
             // Set flash data for success message
             $successMessage = 'Article added successfully.';
             session()->setFlashdata('success', $successMessage);
-
-            $articles = $this->articleModel->findAll();
-
-            return view('article/article', ['successMessage'=>$successMessage, 'articles'=>$articles]);
+            return redirect()->to('/article/create');
         }
     }
 
@@ -108,5 +109,19 @@ class ArticleController extends BaseController
         }else{
             return "Data not found";
         }
+    }
+
+    public function getCategories(){
+        $languageId = $this->request->getPost('languageId');
+
+        $query = $this->db->query("SELECT * FROM categories WHERE language_id = '$languageId'");
+        $response = $query->getResult();
+
+        // $categoryModel = new CategoryModel();
+        // $categories = $categoryModel->where('language_id','2')->findAll();
+
+        // $response['categories'] = $categories;
+
+        return $this->response->setJSON(['categories' => $response]);
     }
 }

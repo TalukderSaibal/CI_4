@@ -22,7 +22,6 @@ class CategoryController extends BaseController
         LEFT JOIN languages ON categories.language_id = languages.id");
         $results = $query->getResult();
 
-
         $data = [
             'res'        => $results,
             'categories' => $this->model->paginate(6),

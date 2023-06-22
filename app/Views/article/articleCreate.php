@@ -50,6 +50,11 @@
             </div>
 
             <div class="language_div">
+                <?php if (session()->getFlashdata('delete_success')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('delete_success'); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="language_list">
                     <form action="<?php base_url('article/create') ?>" method="POST" enctype="multipart/form-data" id="myForm">
                         <div class="full_form">
@@ -84,7 +89,8 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Language <span style="color:red;">*</span></label>
                                     <select class="form-control" id="languageSelect" name="languageSelect">
-                                        <?php
+                                        <option value="0">Select</option>
+                                    <?php
                                         
                                         foreach($language as $key=> $lang){ ?>
                                             <option value="<?= $lang['id'] ?>"><?= $lang['language_name'] ?></option>
@@ -143,28 +149,29 @@
     <script>
         $(document).ready(function() {
             // Define the language to category mapping
-            const languageCategories = {
-                english: ["File Upload", "Video Sharing", "Storage"],
-                bangla : ["File Upload", "Video Sharing", "Storage"],
-                french : ["File Upload", "Video Sharing", "Storage"],
-            };
-            console.log(languageCategories);
+            // const languageCategories = {
+            //     english: ["File Upload", "Video Sharing", "Storage"],
+            //     bangla : ["File Upload", "Video Sharing", "Storage"],
+            //     french : ["File Upload", "Video Sharing", "Storage"],
+            // };
             $('#languageSelect').on('change',function() {
-                var languageSelect = $(this).val();
-                var categorySelect = $('#categorySelect');
+                var languageId = $(this).val();
+                $.ajax({
+                    url:'/getCategories',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: 'languageId='+languageId,
+                    success : function(response){
+                        var options = '';
 
-                categorySelect.empty();
+                        // Generate category options based on the response
+                        $.each(response.categories, function(index, category) {
+                            options += '<option value="' + category.id + '">' + category.category_name + '</option>';
+                        });
 
-                // Populate options based on selected language
-                const categories = languageCategories[languageSelect];
-                if (categories && Array.isArray(categories)) {
-                    categories.forEach(function(category) {
-                        categorySelect.append($('<option></option>').text(category));
-                    });
-                } else {
-                    // Handle the case when no categories are found
-                    categorySelect.append($('<option></option>').text('No categories found'));
-                }
+                        $('#categorySelect').html(options);
+                    }
+                });
             });
         });
     </script>

@@ -24,15 +24,12 @@
 
             <div class="language_div">
                 <div class="language_list">
-                    <?php
-                    
-                        if (session()->getFlashdata('success')): ?>
-                            <div class="alert alert-success">
-                                <?= session()->getFlashdata('success') ?>
-                            </div>
-                        <?php endif; 
-                    
-                    ?>
+
+                <?php if (session()->getFlashdata('success')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('success'); ?>
+                    </div>
+                <?php endif; ?>
 
 
                 <table class="table">
@@ -54,30 +51,34 @@
 
 
                         
-                        foreach($articles as $value): ?>
+                        foreach($articles as $value){
+                            foreach($res as $val){
+                                if($val->id == $value['article_language']){ ?>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><?= strtoupper($val->language_name) ?></td>
+                                        <td>
+                                            <div style="display: flex;">
+                                                <a href="<?= base_url('article/edit/' . $value['id']) ?>">
+                                                <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
+                                                </a>
+                                                <div>
+                                                    <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
+                                                    <p><?= $value['article_description'] ?></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Admin Amdin</td>
+                                        <td>Missing</td>
+                                        <td>20</td>
+                                        <td>0</td>
+                                        <td>Oct 15, 2022 03:14 PM</td>
+                                    </tr>
+                               <?php break; }
+                            }
+                        }
                         
-                        <?php ?>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><?= strtoupper($value['article_language']) ?></td>
-                            <td>
-                                <div style="display: flex;">
-                                    <a href="<?= base_url('article/edit/' . $value['id']) ?>">
-                                    <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
-                                    </a>
-                                    <div>
-                                        <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
-                                        <p><?= $value['article_description'] ?></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Admin Amdin</td>
-                            <td>Missing</td>
-                            <td>20</td>
-                            <td>0</td>
-                            <td>Oct 15, 2022 03:14 PM</td>
-                        </tr>
-                        <?php endforeach; ?>
+                        ?>
                     </tbody>
                 </table>
                 <div class="pagination">
