@@ -35,7 +35,7 @@
         <div class="row">
             <div class="language_header">
                 <div class="lan_head">
-                    <h1>Create Article</h1>
+                    <h1>Update Article</h1>
                 </div>
 
                 <div class="icon_category">

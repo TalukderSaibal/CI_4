@@ -19,9 +19,10 @@ class ArticleController extends BaseController
     }
 
     public function show(){
-        $query = $this->db->query('SELECT * FROM languages
-        LEFT JOIN articletbl ON languages.id = articletbl.article_language');
+        $query = $this->db->query('SELECT * FROM articletbl
+        LEFT JOIN languages ON articletbl.article_language = articletbl.id');
         $res  = $query->getResult();
+
 
         $data = [
             'res'      => $res,

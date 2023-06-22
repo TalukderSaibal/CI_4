@@ -64,40 +64,38 @@
                     </thead>
                     <tbody>
                         <?php
-
-
-                        
-                        foreach($articles as $value){
-                            foreach($res as $val){
-                                if($val->id == $value['article_language']){ ?>
-                                    <tr>
-                                        <th scope="row"><?= $value['id'] ?></th>
-                                        <td><?= strtoupper($val->language_name) ?></td>
-                                        <td>
-                                            <div style="display: flex;">
-                                                <a href="<?= base_url('article/edit/' . $value['id']) ?>">
-                                                <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
-                                                </a>
-                                                <div>
-                                                    <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
-                                                    <p><?= $value['article_description'] ?></p>
+                            
+                            foreach($articles as $value){
+                                foreach($res as $val){
+                                    if($val->id == $value['article_language']){ ?>
+                                        <tr>
+                                            <th scope="row"><?= $value['id'] ?></th>
+                                            <td><?= strtoupper($val->language_name) ?></td>
+                                            <td>
+                                                <div style="display: flex;">
+                                                    <a href="<?= base_url('article/edit/' . $value['id']) ?>">
+                                                    <img style="width:40px; height:40px;" src="<?= base_url('articleImage/' . $value['article_image']) ?>" alt="no images">
+                                                    </a>
+                                                    <div>
+                                                        <p style="margin-bottom: 0;"><?= $value['article_title'] ?></p>
+                                                        <p><?= $value['article_description'] ?></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>Admin Amdin</td>
-                                        <td>Missing</td>
-                                        <td>20</td>
-                                        <td>0</td>
-                                        <td>Oct 15, 2022 03:14 PM</td>
-                                        <td>
-                                            <a class="btn btn-sm btn-primary" href="">View</a>
-                                            <a class="btn btn-sm btn-warning" href="<?= base_url('article/delete/'. $value['id']) ?>">Delete</a>
-                                        </td>
-                                    </tr>
-                               <?php break; }
+                                            </td>
+                                            <td>Admin Amdin</td>
+                                            <td>Missing</td>
+                                            <td>20</td>
+                                            <td>0</td>
+                                            <td>Oct 15, 2022 03:14 PM</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary" href="">View</a>
+                                                <a class="btn btn-sm btn-warning" href="<?= base_url('article/delete/'. $value['id']) ?>">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php break; }
+                                }
                             }
-                        }
-                        
+                            
                         ?>
                     </tbody>
                 </table>
