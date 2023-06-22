@@ -77,6 +77,32 @@ class CategoryController extends BaseController
         
     }
 
+    // Category edit form
+    public function edit($id){
+        if($id != null){
+
+            $languageData = $this->languageModel->findAll();
+
+            $query = 'SELECT * FROM categories
+            LEFT JOIN  languages ON categories.language_id =  languages.id
+            WHERE categories.id= ' . $id;
+
+            $result = $this->db->query($query);
+            $data = $result->getResult();
+
+            foreach($data as $value){
+                $languageId = $value->language_id;
+                $query1 = 'SELECT category_name FROM categories WHERE language_id=' . $languageId;
+                $catgeory = $this->db->query($query1);
+                $catgeory = $catgeory->getResult();
+            }
+
+            if($data){
+                return view('category/categoryEdit', ['category'=> $catgeory,'data'=>$data, 'languages' => $languageData]);
+            }
+        }
+    }
+
     public function search(){
         $searchData = $this->request->getPost('search');
 
@@ -87,6 +113,15 @@ class CategoryController extends BaseController
         // die();
         
         return view('category/categoryView', ['results' => $result]);
+    }
+
+    public function delete($id){
+        $res = $this->model->delete($id);
+        if($res){
+            $msg = 'Catgeory deleted';
+            session()->setFlashdata('delete', $msg);
+            return redirect()->to('//category/create');
+        }
     }
 
 }

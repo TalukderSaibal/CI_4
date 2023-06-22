@@ -21,8 +21,6 @@
             </div>
         </div>
 
-       
-
         <div>
             
             <div class="catgeory_table">
@@ -32,6 +30,12 @@
                         <input type="submit" value="Search" name="submit">
                     </form>
                 </div>
+
+                <?php if (session()->getFlashdata('delete')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('delete'); ?>
+                    </div>
+                <?php endif; ?>
 
 
                 <table class="table">
@@ -63,8 +67,8 @@
                                 <td>@mdo</td>
                                 <td>
                                     <a class="btn btn-sm btn-primary" href="">View</a>
-                                    <a class="btn btn-sm btn-success" href="">Edit</a>
-                                    <a class="btn btn-sm btn-warning" href="">Delete</a>
+                                    <a class="btn btn-sm btn-success" href="<?= base_url('category/edit/'. $category['id']) ?>">Edit</a>
+                                    <a class="btn btn-sm btn-warning" href="<?= base_url('delete/'. $category['id'])?>">Delete</a>
                                 </td>
                             </tr>
                             <?php break; ?>
