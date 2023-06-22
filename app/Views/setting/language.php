@@ -29,6 +29,13 @@
                         <input type="submit" value="Search" name="submit">
                     </form>
                 </div>
+
+                <?php if (session()->getFlashdata('delete_success')) : ?>
+                    <div class="alert alert-success">
+                        <?php echo session()->getFlashdata('delete_success'); ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="language_list">
                 <?php
                 
@@ -70,7 +77,7 @@
                             <td>
                                 <a class="btn btn-sm btn-primary" href="">View</a>
                                 <a class="btn btn-sm btn-success" href="<?= base_url('edit/'. $language['id']) ?>">Edit</a>
-                                <a class="btn btn-sm btn-warning" href="">Delete</a>
+                                <a class="btn btn-sm btn-warning" href="<?= base_url('delete/'. $language['id']) ?>">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

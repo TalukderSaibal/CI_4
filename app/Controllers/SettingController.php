@@ -162,4 +162,12 @@ class SettingController extends BaseController
 
         // return $this->response->setJSON($data);
     }
+
+    public function delete($id){
+        if($id != null){
+            $this->model->delete($id);
+            session()->setFlashdata('delete_success', 'Language deleted successfully.');
+            return redirect()->to('/language/setting');
+        }
+    }
 }

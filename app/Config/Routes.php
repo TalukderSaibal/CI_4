@@ -39,6 +39,7 @@ $routes->match(['get', 'post'], 'language/create', 'SettingController::create');
 $routes->get('/langauge/edit/(:any)', 'SettingController::edit/$1');
 $routes->get('/edit/(:any)', 'SettingController::edit/$1');
 $routes->post('/language/update', 'SettingController::update');
+$routes->get('/delete/(:num)', 'SettingController::delete/$1');
 
 //For language search
 $routes->post('/language/search', 'SettingController::languageSearch');
