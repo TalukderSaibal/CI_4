@@ -70,6 +70,9 @@ $routes->post('/category/search', 'CategoryController::search');
 // Auto Populate Route
 $routes->get('populate/code', 'SettingController::fetchData');
 
+//For testing database
+$routes->get('/card-save', 'CardController::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

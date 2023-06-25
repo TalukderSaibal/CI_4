@@ -228,9 +228,9 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->
             <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+              <a href="<?= base_url('card-save') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Cards</div>
+                <div data-i18n="Basic">Testing</div>
               </a>
             </li>
             <!-- User interface -->
