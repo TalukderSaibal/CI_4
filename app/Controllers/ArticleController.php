@@ -42,10 +42,6 @@ class ArticleController extends BaseController
     }
 
     public function create(){
-
-        
-
-
         $validation = \Config\Services::validation();
 
         $title          = $this->request->getPost('title');
@@ -70,15 +66,6 @@ class ArticleController extends BaseController
         ];
 
         $data = $this->articleModel->save($data);
-
-
-
-        // if($data){
-        //     // Set flash data for success message
-        //     $successMessage = 'Article added successfully.';
-        //     session()->setFlashdata('success', $successMessage);
-        //     return redirect()->to('/article/create');
-        // }
 
         return $this->response->setJSON([
             'success' => true,

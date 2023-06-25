@@ -64,6 +64,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Article Title <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" name="title" id="title">
+                                    <span id="titleErr"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug <span style="color:red;">*</span></label>

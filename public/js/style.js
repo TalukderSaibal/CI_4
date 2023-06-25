@@ -15,7 +15,7 @@ $(document).ready(function() {
             return;
         }
 
-         // Form submission logic goes here
+        // Form submission logic goes here
 
         var title = $('#title').val();
         var slug = $('#title').val();
@@ -30,7 +30,7 @@ $(document).ready(function() {
         $.ajax({
           url:'/article_save',
           type: 'POST',
-          data: $(this).serialize(),
+          data: formData,
           success: function(response) {
             console.log(response);
           }
@@ -99,11 +99,11 @@ $(document).ready(function() {
 //         // var description = $('#description').val();
 
 //         // var formData = 'title=' + title + '&slug=' + slug + '&summernote=' + summernote + '&image=' + image + '&languageSelect=' + languageSelect +'&categorySelect=' + categorySelect + '&description=' + description;
-
+//         var formData = new FormData(form);
 //         $.ajax({
 //           url:'/article_save',
 //           type: 'POST',
-//           data: $(this).serialize(),
+//           data: formData,
 //           success: function(response) {
 //             console.log(response);
 //           }
