@@ -33,38 +33,57 @@ class ArticleController extends BaseController
         return view('article/article', $data);
     }
 
+    // Article Form showing method
+    public function articleSave(){
+        $languageModel = new LanguageModel();
+        $languageData = $languageModel->findAll();
+
+        return view('article/articleCreate', ['language'=>$languageData]);
+    }
 
     public function create(){
+
+        
+
+
         $validation = \Config\Services::validation();
 
-        if(!$this->request->is('post')){
-            $languageModel = new LanguageModel();
-            $languageData = $languageModel->findAll();
-            return view('article/articleCreate', ['language'=>$languageData]);
-        }
+        $title          = $this->request->getPost('title');
+        $slug           = $this->request->getPost('slug');
+        $summernote     = $this->request->getPost('summernote');
+        $image          = $this->request->getFile('image');
+        $languageSelect = $this->request->getPost('languageSelect');
+        $categorySelect = $this->request->getPost('categorySelect');
+        $description    = $this->request->getPost('description');
 
+        $flagFile = $this->request->getFile('image');
+        $flagFile->move(ROOTPATH . 'public/articleImage');
+        
         $data = [
-            'article_title'       => $this->request->getPost('title'),
-            'slug'                => $this->request->getPost('slug'),
-            'article_content'     => $this->request->getPost('summernote'),
-            'article_image'       => $this->request->getFile('image')->getName(),
-            'article_language'    => $this->request->getPost('languageSelect'),
-            'article_category'    => $this->request->getPost('categorySelect'),
-            'article_description' => $this->request->getPost('description'),
+            'article_title'       => $title,
+            'slug'                => $slug,
+            'article_content'     => $summernote,
+            'article_image'       => $image,
+            'article_language'    => $languageSelect,
+            'article_category'    => $categorySelect,
+            'article_description' => $description
         ];
 
-        $data = $this->articleModel->insert($data);
-
-        $imageFile = $this->request->getFile('image');
-        $imageFile->move(ROOTPATH . 'public/articleImage');
+        $data = $this->articleModel->save($data);
 
 
-        if($data){
-            // Set flash data for success message
-            $successMessage = 'Article added successfully.';
-            session()->setFlashdata('success', $successMessage);
-            return redirect()->to('/article/create');
-        }
+
+        // if($data){
+        //     // Set flash data for success message
+        //     $successMessage = 'Article added successfully.';
+        //     session()->setFlashdata('success', $successMessage);
+        //     return redirect()->to('/article/create');
+        // }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Form submitted successfully'
+        ]);
     }
 
     public function update($id){

@@ -50,13 +50,15 @@
             </div>
 
             <div class="language_div">
+
                 <?php if (session()->getFlashdata('delete_success')) : ?>
                     <div class="alert alert-success">
                         <?php echo session()->getFlashdata('delete_success'); ?>
                     </div>
                 <?php endif; ?>
+
                 <div class="language_list">
-                    <form action="<?php base_url('article/create') ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                    <form action="" method="POST" enctype="multipart/form-data" id="myForm">
                         <div class="full_form">
                             <div class="form_left">
                                 <div class="form-group">
