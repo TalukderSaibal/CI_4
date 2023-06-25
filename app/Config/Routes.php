@@ -36,6 +36,7 @@ $routes->get('/language/setting', 'SettingController::index');
 // $routes->get('/language/create', 'SettingController::create');
 // $routes->post('/language/create', 'SettingController::create');
 $routes->match(['get', 'post'], 'language/create', 'SettingController::create');
+$routes->post('language_create', 'SettingController::languageCreate');
 $routes->get('/langauge/edit/(:any)', 'SettingController::edit/$1');
 $routes->get('/edit/(:any)', 'SettingController::edit/$1');
 $routes->post('/language/update', 'SettingController::update');

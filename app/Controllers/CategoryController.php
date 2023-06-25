@@ -63,10 +63,6 @@ class CategoryController extends BaseController
             ];
             return json_encode($response);
         }
-
-        // $language = $this->request->getPost('language');
-        // $name = $this->request->getPost('name');
-        // $slug = $this->request->getPost('slug');
         
         $data = [
             'language_id' => $this->request->getPost('language'),
