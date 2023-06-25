@@ -1,44 +1,44 @@
-$(document).ready(function() {
-    $('#myForm').submit(function(event) {
-        event.preventDefault();
+// $(document).ready(function() {
+//     $('#myForm').submit(function(event) {
+//         event.preventDefault();
 
-        var title = $('#title').val();
-        var slug = $('#slug').val();
+//         var title = $('#title').val();
+//         var slug = $('#slug').val();
 
-        if(title === ''){
-            $('#titleErr').text('Please enter a title');
-            return;
-        }
+//         if(title === ''){
+//             $('#titleErr').text('Please enter a title');
+//             return;
+//         }
 
-        if(slug === ''){
-            $('#slugErr').text('Please enter a slug');
-            return;
-        }
+//         if(slug === ''){
+//             $('#slugErr').text('Please enter a slug');
+//             return;
+//         }
 
-        // Form submission logic goes here
+//         // Form submission logic goes here
 
-        var title = $('#title').val();
-        var slug = $('#title').val();
-        var summernote = $('#summernote').val();
-        var image = $('#image').val().split('\\').pop(); 
-        var languageSelect = $('#languageSelect').val();
-        var categorySelect = $('#categorySelect').val();
-        var description = $('#description').val();
+//         var title = $('#title').val();
+//         var slug = $('#title').val();
+//         var summernote = $('#summernote').val();
+//         var image = $('#image').val(); 
+//         var languageSelect = $('#languageSelect').val();
+//         var categorySelect = $('#categorySelect').val();
+//         var description = $('#description').val();
 
-        var formData = 'title=' + title + '&slug=' + slug + '&summernote=' + summernote + '&image=' + image + '&languageSelect=' + languageSelect +'&categorySelect=' + categorySelect + '&description=' + description;
+//         var formData = 'title=' + title + '&slug=' + slug + '&summernote=' + summernote + '&image=' + image + '&languageSelect=' + languageSelect +'&categorySelect=' + categorySelect + '&description=' + description;
 
-        $.ajax({
-          url:'/article_save',
-          type: 'POST',
-          data: formData,
-          success: function(response) {
-            console.log(response);
-          }
-        })
+//         $.ajax({
+//           url:'/article_save',
+//           type: 'POST',
+//           data: formData,
+//           success: function(response) {
+//             console.log(response);
+//           }
+//         })
 
-        // $(this).unbind('submit').submit();
-    });
-});
+//         // $(this).unbind('submit').submit();
+//     });
+// });
 
 // Article Form validation
 // $(document).ready(function() {
@@ -111,4 +111,22 @@ $(document).ready(function() {
 //         // form.submit();
 //       }
 //     });
+// });
+
+
+// $(document).ready(function() {
+//   $('#myForm').submit(function(event){
+//     event.preventDefault();
+
+//     var formData = $(this).serialize();
+
+//     $.ajax({
+//       url: '/article_save',
+//       type: 'POST',
+//       data: formData,
+//       success: function(response) {
+//         console.log(response);
+//       }
+//     });
+//   });
 // });

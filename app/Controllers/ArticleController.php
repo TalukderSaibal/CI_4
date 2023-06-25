@@ -42,19 +42,14 @@ class ArticleController extends BaseController
     }
 
     public function create(){
-        $validation = \Config\Services::validation();
-
         $title          = $this->request->getPost('title');
         $slug           = $this->request->getPost('slug');
         $summernote     = $this->request->getPost('summernote');
-        $image          = $this->request->getFile('image');
+        $image          = $this->request->getFile('image')->getName();
         $languageSelect = $this->request->getPost('languageSelect');
         $categorySelect = $this->request->getPost('categorySelect');
         $description    = $this->request->getPost('description');
 
-        $flagFile = $this->request->getFile('image');
-        $flagFile->move(ROOTPATH . 'public/articleImage');
-        
         $data = [
             'article_title'       => $title,
             'slug'                => $slug,
@@ -64,13 +59,11 @@ class ArticleController extends BaseController
             'article_category'    => $categorySelect,
             'article_description' => $description
         ];
-
-        $data = $this->articleModel->save($data);
-
-        return $this->response->setJSON([
-            'success' => true,
-            'message' => 'Form submitted successfully'
-        ]);
+        $res = $this->articleModel->insert($data);
+        $image = $this->request->getFile('image');
+        $image->move(ROOTPATH . 'public/articleImage');
+        
+        
     }
 
     public function update($id){

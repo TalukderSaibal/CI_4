@@ -58,7 +58,7 @@
                 <?php endif; ?>
 
                 <div class="language_list">
-                    <form action="" method="POST" enctype="multipart/form-data" id="myForm">
+                    <form action="<?= base_url('article_save') ?>" method="POST" enctype="multipart/form-data" id="myForm">
                         <div class="full_form">
                             <div class="form_left">
                                 <div class="form-group">
