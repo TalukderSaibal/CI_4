@@ -15,7 +15,7 @@
                 <a href="">
                     Settings
                 </a>
-                <a href="<?= base_url('category/save') ?>">
+                <a href="<?= base_url('category_save') ?>">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             </div>

@@ -12,7 +12,7 @@
                 <div class="alert alert-success"><?php echo session('success'); ?></div>
             <?php endif; ?>
 
-                <form action="<?php base_url('category/save') ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                <form action="" method="POST" enctype="multipart/form-data" id="myForm">
                     <div class="form_display">
                         <div class="category_select">
                             <div class="form-group">
@@ -36,6 +36,7 @@
                                 <label for="exampleInputEmail1">Catgeory Name <span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" name="name" id="name">
                                 <span><?= validation_show_error('name') ?></span>
+                                <span id="categoryErr"></span>
                             </div>
                         </div>
                     </div>
@@ -44,11 +45,44 @@
                         <label for="exampleInputEmail1">Slug <span style="color:red;">*</span></label>
                         <input type="text" class="form-control" name="slug" id="slug">
                         <span><?= validation_show_error('slug') ?></span>
+                        <span id="successDiv"></span>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+    <script src="<?= base_url('js/style.js') ?>"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#myForm').submit(function(e){
+                e.preventDefault();
+
+                var successDiv = $('#successDiv');
+                var categoryErr = $('#categoryErr');
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '/create_category',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response){
+                        var language = response.language.message;
+                        var name = response.name.message;
+                        var slug = response.slug.message;
+                        if(name != null){
+                            categoryErr.text(name);
+                        }
+                        if(slug != null){
+                            successDiv.text(slug);
+                        }
+                    }
+                })
+            })
+        });
+    </script>
 
 <?= $this->endSection('content') ?>

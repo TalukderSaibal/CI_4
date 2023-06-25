@@ -60,7 +60,11 @@ $routes->get('/article/delete/(:any)', 'ArticleController::delete/$1');
 
 //Category Settings
 $routes->get('/category/create','CategoryController::index');
-$routes->match(['get', 'post'],'category/save','CategoryController::create');
+// $routes->match(['get', 'post'],'category/save','CategoryController::create');
+
+$routes->get('/category_save', 'CategoryController::categoryform');
+$routes->post('/create_category', 'CategoryController::createcategory');
+
 $routes->get('/category/edit/(:any)', 'CategoryController::edit/$1');
 $routes->get('delete/(:any)', 'CategoryController::delete/$1');
 

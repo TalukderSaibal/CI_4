@@ -31,51 +31,101 @@ class CategoryController extends BaseController
         return view('category/category', $data);
     }
 
-    public function create(){
+    public function categoryform(){
         $languageData = $this->languageModel->findAll();
         $msg = "";
-        
-        if(!$this->request->is('post')){
-            return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
-        }else{
-            $validation = \Config\Services::validation();
-                $rules = [
-                    'language' => 'required',
-                    'name'     => 'required',
-                    'slug'     => 'required',
-                ];
-
-                if (!$this->validate($rules)) {
-                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
-                }
-
-                $languagevalue = $this->request->getPost('language');
-                if($languagevalue == 0){
-                    $msg = "You must select a language";
-                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
-                }
-
-                $data = [
-                    'language_id' => $this->request->getPost('language'),
-                    'category_name' => $this->request->getPost('name'),
-                    'category_slug' => $this->request->getPost('slug'),
-                ];
-
-                $res = $this->model->insert($data);
-
-                $successMessage = 'Catgeory added successfully.';
-                session()->setFlashdata('success', $successMessage);
-
-                //retrive All Data from database
-                $categories = $this->model->findAll();
-
-                if($res){
-                    return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg, 'successMsg' => $successMessage]);
-                    // return view('category/category', ['categories' => $categories,'successMsg' => $successMessage]);
-                } 
-        }
-        
+        return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
     }
+
+    public function createcategory(){
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            'language' => 'required',
+            'name'     => 'required',
+            'slug'     => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            $response = [
+                'language' => [
+                    'status' => 'required',
+                    'message' => 'Please enter a valid language',
+                ],
+                'name' => [
+                    'status' => 'required',
+                    'message' => 'Please enter a name',
+                ],
+                'slug' => [
+                    'status' => 'failed',
+                    'message' => 'Please enter a slug',
+                ],
+            ];
+            return json_encode($response);
+        }
+
+        // $language = $this->request->getPost('language');
+        // $name = $this->request->getPost('name');
+        // $slug = $this->request->getPost('slug');
+        
+        $data = [
+            'language_id' => $this->request->getPost('language'),
+            'category_name' => $this->request->getPost('name'),
+            'category_slug' => $this->request->getPost('slug'),
+        ];
+        
+        $res = $this->model->insert($data);
+
+        if($res){
+            return 'data successfully inserted';
+        }
+    }
+
+    // public function create(){
+    //     $languageData = $this->languageModel->findAll();
+    //     $msg = "";
+        
+    //     if(!$this->request->is('post')){
+    //         return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
+    //     }else{
+    //         $validation = \Config\Services::validation();
+    //             $rules = [
+    //                 'language' => 'required',
+    //                 'name'     => 'required',
+    //                 'slug'     => 'required',
+    //             ];
+
+    //             if (!$this->validate($rules)) {
+    //                 return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
+    //             }
+
+    //             $languagevalue = $this->request->getPost('language');
+    //             if($languagevalue == 0){
+    //                 $msg = "You must select a language";
+    //                 return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg]);
+    //             }
+
+    //             $data = [
+    //                 'language_id' => $this->request->getPost('language'),
+    //                 'category_name' => $this->request->getPost('name'),
+    //                 'category_slug' => $this->request->getPost('slug'),
+    //             ];
+
+    //             $res = $this->model->insert($data);
+
+    //             $successMessage = 'Catgeory added successfully.';
+    //             session()->setFlashdata('success', $successMessage);
+
+    //             //retrive All Data from database
+    //             $categories = $this->model->findAll();
+
+    //             if($res){
+    //                 return view('category/createcategory', ['languages' => $languageData, 'msg' => $msg, 'successMsg' => $successMessage]);
+    //                 // return view('category/category', ['categories' => $categories,'successMsg' => $successMessage]);
+    //             } 
+    //     }
+        
+    // }
 
     // Category edit form
     public function edit($id){
