@@ -27,6 +27,48 @@ class SettingController extends BaseController
         return view('setting/language', $data);
     }
 
+    public function languageCreate(){
+        $languageModel = new LanguageModel();
+            $rules = [
+                'flag' => 'uploaded[flag]|mime_in[flag,image/png,image/jpg,image/jpeg]|max_size[flag,2048]',
+                'name' => 'required',
+                // 'languageCheck' => 'required'
+            ];
+
+            if (!$this->validate($rules)) {
+                $response = [
+                    'status' => 'failed',
+                    'message' => 'Please enter a name'
+                ];
+
+                return json_encode($response);
+            }
+
+            $flagFile      = $this->request->getFile('flag')->getName();
+            $name          = $this->request->getPost('name');
+            $code          = $this->request->getPost('code');
+            $direction     = $this->request->getPost('direction');
+            $languageCheck = $this->request->getPost('languageCheck') ? 1:0;
+
+            // if($code == 0){
+            //     $msg = "Please choose a language";
+            //     return view('setting/createLanguage', ['res' => $result, 'msg' => $msg]);
+            // }
+
+            $data = [
+                'language_image'  => $flagFile,
+                'language_name'   => $name,
+                'code'            => $code,
+                'direction'       => $direction,
+                'language_status' => $languageCheck
+            ];
+
+            $languageModel->insert($data);
+
+            $flagFile = $this->request->getFile('flag');
+            $flagFile->move(ROOTPATH . 'public/uploads');
+    }
+
     // Language Added Method
     public function create(){
 

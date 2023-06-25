@@ -16,7 +16,7 @@
     <?php endif; ?>
 
     <div class="language_form">
-        <form action="" method="post" enctype="multipart/form-data" id="myForm">
+        <form action="" method="POST" enctype="multipart/form-data" id="myForm1">
             <div class="file_div">
                 <div class="form-group frm">
                     <label for="exampleFormControlFile1">Choose Flag</label>
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<?= $this->endSection('content') ?>
+
 
 
 <script src="<?= base_url('js/style.js') ?>"></script>
@@ -79,10 +79,8 @@
 
     <script>
         $(document).ready(function() {
-            $('#myForm').submit(function(e){
+            $('#myForm1').submit(function(e){
                 e.preventDefault();
-
-                var formData = $(this).serialize();
 
                 $.ajax({
                     url: '/language_create',
@@ -90,11 +88,16 @@
                     data: formData,
                     dataType: 'json',
                     success: function(response){
-                        alert(response.success);
+                        if(response.status == 'failed'){
+                            alert(response.message);
+                        }
                     }
                 })
             });
         });
 
-        
 </script>
+
+
+<?= $this->endSection('content') ?>
+
