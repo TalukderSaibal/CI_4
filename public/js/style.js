@@ -1,47 +1,4 @@
 // $(document).ready(function() {
-//     $('#myForm').submit(function(event) {
-//         event.preventDefault();
-
-//         var title = $('#title').val();
-//         var slug = $('#slug').val();
-
-//         if(title === ''){
-//             $('#titleErr').text('Please enter a title');
-//             return;
-//         }
-
-//         if(slug === ''){
-//             $('#slugErr').text('Please enter a slug');
-//             return;
-//         }
-
-//         // Form submission logic goes here
-
-//         var title = $('#title').val();
-//         var slug = $('#title').val();
-//         var summernote = $('#summernote').val();
-//         var image = $('#image').val(); 
-//         var languageSelect = $('#languageSelect').val();
-//         var categorySelect = $('#categorySelect').val();
-//         var description = $('#description').val();
-
-//         var formData = 'title=' + title + '&slug=' + slug + '&summernote=' + summernote + '&image=' + image + '&languageSelect=' + languageSelect +'&categorySelect=' + categorySelect + '&description=' + description;
-
-//         $.ajax({
-//           url:'/article_save',
-//           type: 'POST',
-//           data: formData,
-//           success: function(response) {
-//             console.log(response);
-//           }
-//         })
-
-//         // $(this).unbind('submit').submit();
-//     });
-// });
-
-// Article Form validation
-// $(document).ready(function() {
 //     $('#myForm').validate({
 //       rules: {
 //         title: {
@@ -78,55 +35,25 @@
 //         }
 //       },
 
-//       errorElement: "span", // Use <span> tags for error messages
-//       errorClass: "error-message", // Apply the "error-message" class to error messages
-//       highlight: function(element) {
-//         $(element).addClass("error"); // Add the "error" class to the form field
-//       },
-//       unhighlight: function(element) {
-//         $(element).removeClass("error"); // Remove the "error" class from the form field
-//       },
+//         errorElement: "span", // Use <span> tags for error messages
+//         errorClass: "error-message", // Apply the "error-message" class to error messages
+//         highlight: function(element) {
+//             $(element).addClass("error"); // Add the "error" class to the form field
+//         },
+//         unhighlight: function(element) {
+//             $(element).removeClass("error"); // Remove the "error" class from the form field
+//         },
 
-//       submitHandler: function(form) {
-//         // Form submission logic goes here
-
-//         // var title = $('#title').val();
-//         // var slug = $('#title').val();
-//         // var summernote = $('#summernote').val();
-//         // var image = $('#image').val().split('\\').pop(); 
-//         // var languageSelect = $('#languageSelect').val();
-//         // var categorySelect = $('#categorySelect').val();
-//         // var description = $('#description').val();
-
-//         // var formData = 'title=' + title + '&slug=' + slug + '&summernote=' + summernote + '&image=' + image + '&languageSelect=' + languageSelect +'&categorySelect=' + categorySelect + '&description=' + description;
-//         var formData = new FormData(form);
+//         submitHandler: function(form) {
+//         var formData = new FormData(this);
 //         $.ajax({
-//           url:'/article_save',
-//           type: 'POST',
-//           data: formData,
-//           success: function(response) {
+//             url:'/article_save',
+//             type: 'POST',
+//             data: formData,
+//             success: function(response) {
 //             console.log(response);
-//           }
+//         }
 //         })
-//         // form.submit();
-//       }
+//     }
 //     });
-// });
-
-
-// $(document).ready(function() {
-//   $('#myForm').submit(function(event){
-//     event.preventDefault();
-
-//     var formData = $(this).serialize();
-
-//     $.ajax({
-//       url: '/article_save',
-//       type: 'POST',
-//       data: formData,
-//       success: function(response) {
-//         console.log(response);
-//       }
-//     });
-//   });
 // });

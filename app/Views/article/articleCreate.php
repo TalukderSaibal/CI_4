@@ -58,7 +58,10 @@
                 <?php endif; ?>
 
                 <div class="language_list">
-                    <form action="<?= base_url('article_save') ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                    <div style="background-color: red; color:white;" id="successMsg">
+
+                    </div>
+                    <form action="" method="POST" enctype="multipart/form-data" id="myForm">
                         <div class="full_form">
                             <div class="form_left">
                                 <div class="form-group">
@@ -69,10 +72,12 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="slug" name="slug">
+                                    <span id="slugErr"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Article Content <span style="color:red;">*</span></label>
                                     <textarea class="form-control" id="summernote" name="summernote"></textarea>
+                                    <span id="summernoteErr"></span>
                                 </div>
                             </div>
                             <div class="form_right">
@@ -81,6 +86,7 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1">Choose Image</label>
                                             <input type="file" class="form-control-file" name="image" id="image">
+                                            <span id="imageErr"></span>
                                         </div>
                                         <p>
                                             Allowed (PNG, JPG, JPEG)
@@ -101,6 +107,7 @@
                                         
                                         ?>
                                     </select>
+                                    <span id="languageSelectErr"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -108,16 +115,25 @@
                                     <select class="form-control" id="categorySelect" name="categorySelect">
                                     
                                     </select>
+                                    <span id="categorySelectErr"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Short Description <span style="color:red;">*</span></label>
                                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                    <span id="descriptionErr"></span>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <div id="loadingImage" style="display:flex;">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <img id="imageLoad" src="https://cdn.dribbble.com/users/359314/screenshots/2379673/untitled-3.gif" alt="loading image">
+                        </div>
+                        
                     </form>
+                    
+                    
                 </div>
             </div>
 
@@ -172,6 +188,42 @@
             });
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('#myForm').submit(function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(this);
+            $.ajax({
+                url: "<?= base_url('article_save') ?>",
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                data: formData,
+                beforeSend: function() {
+                    $('#imageLoad').show();
+                },
+                success: function(response) {
+                    if(response.status == 'error'){
+                        var errors = response.errors;
+
+                        for(var field in errors){
+                            var errorMessage = errors[field];
+                            $('#' + field + 'Err').text(errorMessage);
+                        }
+                    }
+
+                    if(response.status == 'success'){
+                        $('#successMsg').text(response.message);
+                    }
+                    $('#imageLoad').hide();
+                }
+            });
+        });
+    });
+</script>
+
 
 </body>
 </html>

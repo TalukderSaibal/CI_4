@@ -165,3 +165,23 @@ border: 1px solid red;
     width: 50%;
     margin: 8px 8px 8px;
 }
+
+#loadingImage{
+    display: flex;
+    align-items: center;
+}
+
+#imageLoad{
+    display: none;
+}
+
+#loadingImage img {
+    width: 80px;
+    height: 34px;
+    background: transparent;
+    margin: 10px 10px 10px;
+    border-radius: 4px;
+}
+.language_list span{
+    color: red;
+}

@@ -42,13 +42,43 @@ class ArticleController extends BaseController
     }
 
     public function create(){
+        $validation = \Config\Services::validation();
+
+        $rules = [
+            'title'          => 'required',
+            'slug'           => 'required',
+            'summernote'     => 'required',
+            'image' => [
+                'uploaded[image]',
+                'mime_in[image,image/jpg,image/jpeg,image/png,image/jpg, image/webpp]',
+                'max_size[image,1024]'
+            ],
+            'languageSelect' => 'required',
+            'categorySelect' => 'required',
+            'description'    => 'required',
+        ];
+
+        if(!$this->validate($rules)){
+            $errors = $validation->getErrors();
+            return $this->response->setJSON([
+                'status' => 'error',
+                'errors' => $errors,
+                'statusCode' => 400
+                ]
+            );
+        }
+
         $title          = $this->request->getPost('title');
         $slug           = $this->request->getPost('slug');
         $summernote     = $this->request->getPost('summernote');
-        $image          = $this->request->getFile('image')->getName();
+        $image          = $this->request->getFile('image')->getClientName();
         $languageSelect = $this->request->getPost('languageSelect');
         $categorySelect = $this->request->getPost('categorySelect');
         $description    = $this->request->getPost('description');
+
+
+        $flag = $this->request->getFile('image');
+        $flag->move(ROOTPATH . 'public/articleImage');
 
         $data = [
             'article_title'       => $title,
@@ -59,11 +89,16 @@ class ArticleController extends BaseController
             'article_category'    => $categorySelect,
             'article_description' => $description
         ];
+
         $res = $this->articleModel->insert($data);
-        $image = $this->request->getFile('image');
-        $image->move(ROOTPATH . 'public/articleImage');
-        
-        
+
+        if($res){
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Article successfully inserted',
+                'statusCode' => 200
+            ]);
+        }
     }
 
     public function update($id){
