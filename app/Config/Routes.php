@@ -55,6 +55,7 @@ $routes->post('/general/save', 'GeneralController::create');
 $routes->get('/article/create', 'ArticleController::show');
 $routes->get('/article/save','ArticleController::articleSave');
 $routes->post('/article_save', 'ArticleController::create');
+$routes->get('article/edit/(:any)', 'ArticleController::edit/$1');
 
 $routes->post('/article/update', 'ArticleController::edit');
 $routes->post('/getCategories', 'ArticleController::getCategories');

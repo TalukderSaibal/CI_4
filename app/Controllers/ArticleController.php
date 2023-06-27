@@ -14,6 +14,7 @@ class ArticleController extends BaseController
         $this->db = \Config\Database::connect();
         $this->articleModel = new ArticleModel();
     }
+    
     public function index(){
         
     }
@@ -101,8 +102,7 @@ class ArticleController extends BaseController
         }
     }
 
-    public function update($id){
-        // $data = $this->articleModel->where('id', $id)->find();
+    public function edit($id){
 
         $query = 'SELECT * FROM  languages
         LEFT JOIN articletbl ON languages.id = articletbl.article_language
@@ -121,10 +121,11 @@ class ArticleController extends BaseController
             $res1 = $result1->getResult();
         }
         return view('article/articleEdit', ['data'=>$res, 'data2' => $res1]);
+
     }
 
     // Article data form
-    public function edit(){
+    public function update(){
 
         // For validation
         $validationRules = [
