@@ -191,9 +191,21 @@ class SettingController extends BaseController
 
     //Language Search Method
     public function languageSearch(){
-        $searchData = $this->request->getPost('search');
-        $result = $this->model->search($searchData);
-        return view('setting/languageView', ['results' => $result]);
+        $searchValue = $this->request->getPost('search');
+
+        $result = $this->model->search($searchValue);
+
+        foreach($result as $key => $value){
+            $name = $value['language_name'];
+            $code = $value['code'];
+
+            $nameDiv = '<div class="language_name">'."Language Name : " . $name .'</div>';
+            $codeDiv = '<div class="language_name">'."Language Code : " . $code .'</div>';
+
+            echo $nameDiv . $codeDiv;
+        }
+
+        return;
     }
 
     //Auto Populate language

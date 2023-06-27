@@ -45,7 +45,7 @@ $routes->post('/language/update', 'SettingController::update');
 $routes->get('/delete/(:num)', 'SettingController::delete/$1');
 
 //For language search
-$routes->post('/language/search', 'SettingController::languageSearch');
+$routes->post('/language_search', 'SettingController::languageSearch');
 
 //General Settings
 $routes->get('/general/create', 'GeneralController::index');

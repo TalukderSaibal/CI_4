@@ -24,10 +24,18 @@
 
             <div class="language_div">
                 <div class="search_language">
-                    <form action="<?= base_url('language/search') ?>" method="post">
-                        <input type="search" name="search">
+                    <form action="" method="POST" id="searchForm">
+                        <input type="search" name="search" id="search">
                         <input type="submit" value="Search" name="submit">
                     </form>
+
+                    <div id="loadingImage" style="display: none;">
+                        <img width="220px" height="50px" src="<?= base_url('gif/bal.gif') ?>" alt="loading gif">
+                    </div>
+
+                    <div id="searchRes">
+
+                    </div>
                 </div>
 
                 <?php if (session()->getFlashdata('delete_success')) : ?>
@@ -121,6 +129,36 @@
                 </div>
             </div>
     </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').submit(function(event) {
+                event.preventDefault();
+
+                var searchValue = $(this).serialize();
+                if(searchValue != null){
+                    $.ajax({
+                        url: '/language_search',
+                        type: 'POST',
+                        data: searchValue,
+                        beforeSend: function(){
+                            $('#loadingImage').show();
+                        },
+                        success:function(response){
+                            if(response){
+                                $('#searchRes').html(response);
+                            }
+
+                            $('#loadingImage').hide()
+                        },
+                    })
+                }
+            });
+        });
+    </script>
 
 
 <?= $this->endSection('content') ?>
