@@ -25,8 +25,8 @@
             
             <div class="catgeory_table">
                 <div class="search_language">
-                    <form action="<?= base_url('category/search') ?>" method="post">
-                        <input type="search" name="search">
+                    <form action="" method="post" id="categoryForm">
+                        <input type="search" name="search" id="search">
                         <input type="submit" value="Search" name="submit">
                     </form>
                 </div>
@@ -110,5 +110,29 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#categoryForm').submit(function(){
+                var formData = $(this).serialize();
+
+                if(formData != null){
+                    $.ajax({
+                        url: '/category_search',
+                        type: 'POST',
+                        data: formData,
+                        beforeSend: function(){
+                            $('#loadingImage').show();
+                        },
+                        success:function(response){
+                            alert(response);
+                        }
+                    })
+                }
+            })
+        });
+    </script>
 
 <?= $this->endSection('content') ?>
