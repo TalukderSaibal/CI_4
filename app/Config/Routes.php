@@ -81,6 +81,10 @@ $routes->get('populate/code', 'SettingController::fetchData');
 //For testing database
 $routes->get('/card-save', 'CardController::index');
 
+
+// For API testing route
+$routes->resource('blog');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
